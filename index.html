@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* 사이버 펑크 / 비밀 작전소 테마 스타일 정의 */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background-color: #0b0f19; 
+      color: #e2e8f0; 
+      padding: 20px;
+    }
+    .container { 
+      max-width: 650px; 
+      margin: auto; 
+      background: #111827; 
+      padding: 30px; 
+      border-radius: 15px; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      border: 2px solid #1f2937;
+    }
+    h1 { color: #10b981; text-align: center; font-size: 2.2em; text-shadow: 0 0 10px rgba(16,185,129,0.3); margin-top: 5px; }
+    h2, h3 { color: #38bdf8; border-bottom: 1px solid #1f2937; padding-bottom: 8px; }
+    
+    .step { display: none; margin-top: 20px; padding: 20px; border: 1px solid #374151; border-radius: 8px; background: #1f2937; }
+    .active { display: block; }
+
+    .typing-text {
+    white-space: pre-line;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #00ff88;
+    min-height: 24px;
+    }
+
+    .typing-text::after {
+      white-space: pre-line;
+      content: "|";
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+    50% {
+    opacity: 0;
+      }
+    }
+    
+    input, select { 
+      padding: 12px; width: calc(100% - 26px); margin-bottom: 15px; 
+      border: 1px solid #4b5563; border-radius: 6px; 
+      background: #0f172a; color: #f8fafc;
+      font-family: monospace; font-size: 1.1em; 
+    }
+    input:focus, select:focus { border-color: #38bdf8; outline: none; }
+    
+    button { 
+      padding: 12px 20px; background: #0284c7; color: white; border: none; border-radius: 6px; 
+      cursor: pointer; margin-right: 5px; font-weight: bold; font-size: 1em; transition: 0.2s;
+    }
+    button:hover { background: #0369a1; box-shadow: 0 0 10px rgba(3,105,161,0.5); }
+    
+    .success-msg { color: #4ade80; font-weight: bold; margin-top: 10px; display: inline-block; font-size: 1.1em; }
+    .error-msg { color: #f87171; font-weight: bold; margin-top: 10px; display: inline-block; font-size: 1.1em; }
+    
+    /* 네온 전광판 데이터 박스 */
+    .data-box { 
+      background: #020617; padding: 15px; border-radius: 8px; 
+      font-family: monospace; font-size: 1.4em; text-align: center; letter-spacing: 3px; 
+      color: #38bdf8; font-weight: bold; display: block; margin: 15px 0;
+      border: 1px solid #0369a1; box-shadow: inset 0 0 10px rgba(3,105,161,0.3);
+    }
+    
+    /* 안내 보드 */
+    .rule-box { background: #111827; border-left: 5px solid #0ea5e9; padding: 15px; margin-bottom: 15px; border-radius: 0 8px 8px 0; }
+    .rule-box ul { margin: 8px 0 0 0; padding-left: 20px; color: #9ca3af; line-height: 1.6; }
+    .rule-box li strong { color: #f43f5e; }
+    
+    .bit-info { background: #1e1b4b; color: #c084fc; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 15px; border: 1px solid #581c87; }
+    
+    /* 🚨 해커 실시간 침입 애니메이션 */
+    @keyframes alert-blink {
+      0% { background-color: #270514; border-color: #f43f5e; color: #fda4af; }
+      50% { background-color: #4c051e; border-color: #e11d48; color: #ffe4e6; box-shadow: 0 0 15px rgba(225,29,72,0.4); }
+      100% { background-color: #270514; border-color: #f43f5e; color: #fda4af; }
+    }
+    .hacker-alert { padding: 18px; border: 2px solid #f43f5e; border-radius: 8px; font-weight: bold; text-align: center; margin: 15px 0; animation: alert-blink 1.5s infinite; font-size: 1.1em; }
+    .timer-text { font-size: 1.5em; color: #f43f5e; font-family: monospace; font-weight: 900; text-shadow: 0 0 5px rgba(244,63,94,0.6); }
+    
+    .link-btn { display: inline-block; margin-top: 10px; padding: 10px 15px; background: #10b981; color: #064e3b; text-decoration: none; border-radius: 6px; font-weight: bold; transition: 0.2s; }
+    .link-btn:hover { background: #34d399; box-shadow: 0 0 10px rgba(52,211,153,0.5); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🔐 해커 VS 보안요원: 디지털 금고 열기</h1>
+  
+  <div id="step-team" class="step active">
+    <h3>[SYSTEM ACCESS] 요원 인증 및 작전 기지 로그인</h3>
+    <p id="missionText" class="typing-text"></p>
+    <p>배정받은 작전 기지 접속 코드를 입력하십시오. (총 10개 팀 운영 중)</p>
+    <input type="text" id="teamCodeInput" placeholder="기지 코드 입력 (예: ALPHA, BRAVO, CHARLIE...)">
+    <button onclick="startMission()">보안 프로토콜 실행</button>
+    <p id="teamSelectResult"></p>
+  </div>
+
+  <div id="step-compress" class="step">
+    <h3>Step 1: 데이터 무손실 압축 (Huffman)</h3>
+    <p>🔐 보안 금고에 보관할 원본 데이터 파일:</p>
+    <span class="data-box" id="rawData"></span>
+    
+    <div class="bit-info">
+      💾 압축 전 순수 크기: <span id="originalBitCount" style="font-size: 1.2em; color: #f43f5e;"></span> BIT (ASCII 8-bit 표준)
+    </div>
+    
+    <div class="rule-box">
+      <strong>⚠️ [통신 가이드: 허프만 압축 명령]</strong>
+      <ul>
+        <li>아래 <b>[허프만 연산 시뮬레이터]</b>를 열고 우리 팀의 원본 데이터를 복사해 넣으세요.</li>
+        <li>나눠준 종이의 3페이지에 있는 "허프만 코드 만들기" 설명에 따라 허프만 코드를 종이에 작성합니다.</li>
+      </ul>
+      <a href="https://cmps-people.ok.ubc.ca/ylucet/DS/Huffman.html" target="_blank" class="link-btn">🖥️ 허프만 연산 시뮬레이터 열기</a>
+    </div>
+    
+    <p>추출해 낸 최종 <strong>압축 이진수(0과 1)</strong> 코드를 금고에 입력하세요.</p>
+    <input type="text" id="compressedInput" placeholder="0101010011...">
+    <button onclick="verifyCompression()">압축 무결성 검증</button>
+    <p id="compressResult"></p>
+  </div>
+
+  <div id="step-encrypt" class="step">
+    <h3>Step 2: 네트워크 암호화 프로토콜 (Manual Encrypt)</h3>
+    <p>검증 완료된 압축 이진수 패킷:</p>
+    <span class="data-box" id="compressedDataDisplay" style="color: #a78bfa; border-color: #6b21a8;"></span>
+    
+    <div class="rule-box" style="border-left-color: #a78bfa;">
+      <strong>⚡ [암호화 수동 프로토콜 지령]</strong>
+      <p style="margin: 5px 0; color: #9ca3af;">보안키 번호에 따라 패킷 데이터를 규칙에 맞게 변형하고 <b>변형한 이진수</b>를 아래에 입력하세요.</p>
+    </div>
+
+    <p>🔑 배정된 보안키 번호: </p>
+      <span id="assignedKey"
+        class="data-box"
+        style="color:#f59e0b;">
+      </span>
+
+    
+    <input type="text" id="encryptedInput" placeholder="규칙을 적용하여 변환한 이진수 입력...">
+    <button onclick="verifyEncryption()">암호화 무결성 검증</button>
+    <p id="encryptResult"></p>
+  </div>
+
+  <div id="step-send" class="step">
+    <h3>Step 3: 보안 채널 전송 패킷 송신</h3>
+    <p>최종 암호화 차단막이 적용된 데이터 패킷:</p>
+    <span class="data-box" id="encryptedDataDisplay" style="color: #f43f5e; border-color: #9f1239;"></span>
+    <button onclick="sendData()" style="background: #e11d48;">파트너 기지로 패킷 쏘기 (전송)</button>
+    <p id="sendResult"></p>
+  </div>
+
+  <div id="step-receive" class="step">
+    <h3>Step 4: 금고 수신 확인 및 코드 해독</h3>
+    <button id="btnCheckReceive" onclick="checkReceive()">📥 파트너 기지 수신 신호 탐지</button>
+    <p id="receiveResult"></p>
+    
+    <div id="hackerWarningBox" class="hacker-alert" style="display:none;">
+      🚨 [위협 감지] 해커가 실시간 가로채기를 시도하며 암호키를 추적 중입니다! 🚨<br>
+      금고 완전 차단(방어 실패)까지 남은 시간: <span id="countdownTimer" class="timer-text">60</span>초
+    </div>
+    
+    <div id="decryptionBox" style="display:none;">
+      <p>📡 <b>수신된 암호화 이진수:</b> <span class="data-box" style="color:#ef4444; border-color:#b91c1c;" id="receivedEncryptedData"></span></p>
+      <p>🔑 <b>파트너 암호 규칙:</b> <span class="data-box" id="receivedKey" style="color:#f59e0b; border-color:#b45309;"></span>
+      <b>파트너가 적용한 <b>암호 규칙을 역순으로 계산</b>하여 이진수를 원상복구 하십시오.</b></p>
+      <p>🔓 <b>암호 해독 후 복원된 이진수 입력</b></p>
+      <input
+        type="text"
+        id="decodedBinaryInput"
+        placeholder="암호 규칙을 역으로 적용한 이진수 입력">
+      <button onclick="verifyDecodedBinary()"
+              style="background:#f59e0b;">
+              암호 해독 검증
+      </button>
+
+<p id="decodeResult"></p>
+      <div class="rule-box" style="background:#0f172a; border-left-color:#38bdf8;">
+        <strong>📋 [수신된 허프만 코드: 파트너 기지의 알파벳 코드]</strong><br>
+        <span id="partnerFrequencyDisplay" style="font-size:1.3em; color:#38bdf8; font-weight:bold; letter-spacing:1px; display:block; margin: 5px 0;"></span>
+        <br>
+        <strong>⚡ [디지털 금고 해독 지령]</strong><br>
+        1. 위 <b>[허프만 코드]</b>로 이진수를 번역할 수 있습니다.<br>
+        2. 이진수를 번역해 알아낸 <b>원래의 영단어</b>를 입력하여 금고 자물쇠를 푸십시오!
+      </div>
+      
+      <input type="text" id="decryptedInput" placeholder="해독된 원본 영단어 입력 (대문자)">
+      <button id="btnVerifyDecrypt" onclick="verifyDecryption()" style="background:#10b981;">🔐 금고 해제 정답 확인</button>
+      <p id="finalResult"></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // --- 🛠️ 10개 팀 확장 데이터셋 (1대1 짝궁 결합 매칭) ---
+  const teamMissions = {
+    'ALPHA':   { partner: 'BRAVO',  receiveKey:'1', raw: "AAAACCDBBBBB",   freq: "A:00 ｜ B:1 ｜ C:010 ｜ D:011", compressed: "0000000001001001111111" },
+    'BRAVO':   { partner: 'ALPHA',  receiveKey:'3',   raw: "XXXYYZWWWWW", freq: "W:0 ｜ X:10 ｜ Y:110 ｜ Z:111", compressed: "10101011011011100000" },
+    
+    'CHARLIE': { partner: 'DELTA',  receiveKey:'2',   raw: "FFFFEEEGGH",   freq: "E:00 ｜ F:1 ｜ G:010 ｜ H:011", compressed: "1111000000010010011" },
+    'DELTA':   { partner: 'CHARLIE',  receiveKey:'1', raw: "KKKKKNLLLMM", freq: "K:0 ｜ L:10 ｜ M:110 ｜ N:111", compressed: "00000111101010110110" },
+    
+    'ECHO':    { partner: 'FOXTROT',  receiveKey:'1', raw: "PIIIIJJJOO",   freq: "I:0 ｜ J:10 ｜ O:110 ｜ P:111", compressed: "1110000101010110110" },
+    'FOXTROT': { partner: 'ECHO',  receiveKey:'3',    raw: "QQQQQRRRRSST", freq: "Q:0 ｜ R:10 ｜ S:110 ｜ T:111", compressed: "0000010101010110110111" },
+    
+    'GOLF':    { partner: 'HOTEL',  receiveKey:'2',   raw: "AAUUUUUVVVB",   freq: "U:1 ｜ V:01 ｜ A:000 ｜ B:001", compressed: "00000011111010101001" },
+    'HOTEL':   { partner: 'GOLF',  receiveKey:'1',    raw: "CCCCCCDDDEEF", freq: "C:0 ｜ D:10 ｜ E:110 ｜ F:111", compressed: "000000101010110110111" },
+    
+    'INDIA':   { partner: 'JULIET',  receiveKey:'2',  raw: "IIGGGGGHHHHJ",   freq: "G:0 ｜ H:10 ｜ I:110 ｜ J:111", compressed: "1101100000010101010111" },
+    'JULIET':  { partner: 'INDIA',  receiveKey:'3',   raw: "PPPPOOOOOOQQR", freq: "O:0 ｜ P:10 ｜ Q:110 ｜ R:111", compressed: "10101010000000110110111" }
+  };
+
+  let myTeam = '';
+  let partnerTeam = '';
+  let myEncryptedData = "";
+  let myKey = ''; 
+  let originalBits = 0;
+  
+  let hackerInterval;
+  let penaltyInterval;
+  let timeLeft = 60; 
+  let penaltyTime = 30; 
+  window.onload = function () {
+  typeMission();
+  };
+
+
+  // 🛠️ 텍스트 코드를 수동 검증하여 접속시키는 함수로 변경
+  function startMission() {
+    const codeInput = document.getElementById('teamCodeInput').value.trim().toUpperCase();
+    const resultEl = document.getElementById('teamSelectResult');
+    
+    if (!codeInput) {
+      alert("접속 코드를 입력하십시오.");
+      return;
+    }
+    
+    if (teamMissions[codeInput]) {
+      myTeam = codeInput;
+      partnerTeam = teamMissions[myTeam].partner;
+      
+      const rawString = teamMissions[myTeam].raw;
+      document.getElementById('rawData').innerText = rawString;
+      
+      originalBits = rawString.length * 8;
+      document.getElementById('originalBitCount').innerText = originalBits;
+      
+      document.getElementById('step-team').classList.remove('active');
+      document.getElementById('step-compress').classList.add('active');
+      document.getElementById('assignedKey').innerText =  teamMissions[myTeam].receiveKey + "번 규칙";
+    } else {
+      resultEl.innerHTML = "<span class='error-msg'>❌ 승인 오류: 유효하지 않은 비밀 코드 기지입니다.</span>";
+    }
+  }
+
+  function typeMission() {
+  const text = "[MISSION]\n  암호화된 정보를 지정된 파트너 팀에 안전하게 전송하라.\n 수신한 데이터를 해독하여 디지털 금고의 인증 코드를 확보하라.";
+  const target = document.getElementById("missionText");
+
+  target.textContent = "";
+
+  let i = 0;
+
+  const typing = setInterval(() => {
+    target.textContent += text.charAt(i);
+    i++;
+
+    if (i >= text.length) {
+      clearInterval(typing);
+    }
+  }, 80); // 숫자가 작을수록 빠름
+ }
+
+  function verifyCompression() {
+    const input = document.getElementById('compressedInput').value.trim();
+    const resultEl = document.getElementById('compressResult');
+    const correctAns = teamMissions[myTeam].compressed;
+
+    if (input === correctAns) {
+      const compressedBits = correctAns.length;
+      const saveRatio = Math.round(((originalBits - compressedBits) / originalBits) * 100);
+      
+      resultEl.innerHTML = `<span class='success-msg'>✓ 압축 패킷 검증 성공!</span><br>
+                            <b style='color:#38bdf8;'>압축 후 데이터 크기: ${compressedBits} BIT</b><br>
+                            (디지털 금고 전송 용량 약 ${saveRatio}% 절감 완료!)`;
+                            
+      document.getElementById('compressedDataDisplay').innerText = correctAns;
+      
+      setTimeout(() => {
+        document.getElementById('step-compress').classList.remove('active');
+        document.getElementById('step-encrypt').classList.add('active');
+      }, 2500);
+    } else {
+      resultEl.innerHTML = "<span class='error-msg'>❌ 검증 실패: 검증 결과 데이터가 일치하지 않습니다. 트리를 다시 분석하세요!</span>";
+    }
+  }
+
+  function verifyEncryption() {
+    const rule = teamMissions[myTeam].receiveKey;
+    const userInput = document.getElementById('encryptedInput').value.trim();
+    const resultEl = document.getElementById('encryptResult');
+    const str = teamMissions[myTeam].compressed;
+    
+    let expectedData = "";
+    
+    if (rule === "1") {
+      expectedData = str.split('').map(b => b === '0' ? '1' : '0').join('');
+    } else if (rule === "2") {
+      expectedData = str.split('').reverse().join('');
+    } else if (rule === "3") {
+      if (str.length > 3) {
+        expectedData = str.slice(3) + str.slice(0, 3);
+      } else {
+        expectedData = str;
+      }
+    }
+    
+    if (userInput === expectedData) {
+      myKey = rule; 
+      myEncryptedData = expectedData;
+      
+      resultEl.innerHTML = `<span class='success-msg'>✓ [${rule}번 규칙] 암호화 프로토콜 일치 확인! 무결성 검증에 성공했습니다.</span>`;
+      document.getElementById('encryptedDataDisplay').innerText = myEncryptedData;
+      
+      setTimeout(() => {
+        document.getElementById('step-encrypt').classList.remove('active');
+        document.getElementById('step-send').classList.add('active');
+      }, 2000);
+    } else {
+      resultEl.innerHTML = "<span class='error-msg'>❌ 암호화 오류: 입력한 이진수가 선택한 규칙의 변환 결과와 다릅니다. 다시 계산하세요!</span>";
+    }
+  }
+
+  function sendData() {
+
+  document.getElementById('sendResult').innerHTML =
+    "<span class='success-msg'>✓ 전송 완료. 수신 채널 연결 중...</span>";
+
+  setTimeout(() => {
+
+    document.getElementById('step-send').classList.remove('active');
+    document.getElementById('step-receive').classList.add('active');
+
+  }, 1000);
+  }
+
+  function encryptDataByRule(data, rule) {
+
+  if (rule === "1") {
+    return data.split('').map(b => b === '0' ? '1' : '0').join('');
+  }
+
+  if (rule === "2") {
+    return data.split('').reverse().join('');
+  }
+
+  if (rule === "3") {
+    return data.length > 3
+      ? data.slice(3) + data.slice(0, 3)
+      : data;
+  }
+
+  return data;
+}
+
+
+
+function checkReceive() {
+
+  document.getElementById('receiveResult').innerText =
+    "위성 신호 스캔 중...";
+
+  const partnerCompressed =
+    teamMissions[partnerTeam].compressed;
+
+  const partnerKey =
+    teamMissions[partnerTeam].receiveKey;
+
+  const partnerEncryptedData =
+    encryptDataByRule(partnerCompressed, partnerKey);
+
+  setTimeout(() => {
+
+    document.getElementById('receiveResult').innerHTML =
+      "<span class='success-msg'>📥 파트너 기지로부터 암호 패킷이 도착했습니다!</span>";
+
+    document.getElementById('receivedEncryptedData').innerText =
+      partnerEncryptedData;
+
+    document.getElementById('receivedKey').innerText =
+      partnerKey + "번 규칙";
+
+    document.getElementById('partnerFrequencyDisplay').innerText =
+      teamMissions[partnerTeam].freq;
+
+    document.getElementById('decryptionBox').style.display = "block";
+
+    triggerHackerAttack();
+
+  }, 1500);
+}
+
+  // 🛠️ [버그 수정 구역 1] 복구 시 파괴된 HTML 구조를 매번 강제로 재창조하도록 변경
+  function triggerHackerAttack() {
+    document.getElementById('btnCheckReceive').disabled = true;
+    
+    const hackerBox = document.getElementById('hackerWarningBox');
+    hackerBox.style.display = "block";
+    hackerBox.style.animation = "alert-blink 1.5s infinite"; // 네온 깜빡임 리셋
+    
+    // 파괴되었던 countdownTimer 스팬 태그를 온전히 복구함
+    hackerBox.innerHTML = `🚨 [위협 감지] 해커가 실시간 가로채기를 시도하며 암호 규칙을 추적 중입니다! 🚨<br>
+                           금고 완전 차단(방어 실패)까지 남은 시간: <span id="countdownTimer" class="timer-text">60</span>초`;
+    
+    timeLeft = 60; 
+    document.getElementById('countdownTimer').innerText = timeLeft;
+    
+    clearInterval(hackerInterval); // 중복 타이머 방지용 클리어
+    hackerInterval = setInterval(function() {
+      timeLeft--;
+      const timerEl = document.getElementById('countdownTimer');
+      if (timerEl) timerEl.innerText = timeLeft;
+      
+      if(timeLeft <= 0) {
+        clearInterval(hackerInterval);
+        triggerFailure("❌ [시스템 다운] 해커가 방화벽을 뚫고 금고 데이터를 소거했습니다!");
+      }
+    }, 1000);
+  }
+function verifyDecodedBinary() {
+
+  const input =
+    document.getElementById('decodedBinaryInput')
+      .value.trim();
+
+  const partnerCompressed =
+    teamMissions[partnerTeam].compressed;
+
+  const resultEl =
+    document.getElementById('decodeResult');
+
+  if (input === partnerCompressed) {
+
+    resultEl.innerHTML =
+      "<span class='success-msg'>✓ 암호 해독 성공!</span>";
+
+    document.getElementById('huffmanBox')
+      .style.display = "block";
+
+    document.getElementById('decryptedInput')
+      .style.display = "block";
+
+    document.getElementById('btnVerifyDecrypt')
+      .style.display = "inline-block";
+
+  } else {
+
+    resultEl.innerHTML =
+      "<span class='error-msg'>❌ 암호 해독 실패. 규칙을 다시 적용해 보세요.</span>";
+  }
+}
+  function verifyDecryption() {
+    const input = document.getElementById('decryptedInput').value.toUpperCase().trim();
+    const correctPartnerRaw = teamMissions[partnerTeam].raw;
+    
+    if (input === correctPartnerRaw) {
+      clearInterval(hackerInterval);
+      document.getElementById('hackerWarningBox').style.animation = "none";
+      document.getElementById('hackerWarningBox').style.backgroundColor = "#064e3b";
+      document.getElementById('hackerWarningBox').style.borderColor = "#10b981";
+      document.getElementById('hackerWarningBox').style.color = "#a7f3d0";
+      document.getElementById('hackerWarningBox').innerHTML = "🛡️ SECURE: 해커 차단 및 디지털 금고 잠금 해제에 성공했습니다!";
+      
+      document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! 자물쇠를 열고 상자 안의 힌트를 획득하십시오!</span>";
+    } else {
+      clearInterval(hackerInterval);
+      triggerFailure("❌ [해독 오류] 잘못된 해독 암호를 입력하여 보안 잠금 장치가 작동합니다!");
+    }
+  }
+
+  // 🛠️ [버그 수정 구역 2] 격리 패널티 타이머 안전 구동 및 완벽 복구 흐름 연결
+  function triggerFailure(reasonMessage) {
+    clearInterval(hackerInterval); // 해커 인터벌 확실하게 파괴
+    
+    document.getElementById('decryptionBox').style.display = "none";
+    document.getElementById('btnVerifyDecrypt').disabled = true;
+    document.getElementById('decryptedInput').disabled = true;
+    
+    document.getElementById('hackerWarningBox').style.animation = "none";
+    document.getElementById('hackerWarningBox').style.backgroundColor = "#450a0a";
+    document.getElementById('hackerWarningBox').style.borderColor = "#f43f5e";
+    document.getElementById('hackerWarningBox').style.color = "#fecdd3";
+    
+    penaltyTime = 30; 
+    document.getElementById('hackerWarningBox').innerHTML = reasonMessage + `<br><b>보안 유출 방지를 위해 30초 동안 데이터가 격리(숨김)됩니다.</b><br>🚨 시스템 자동 복구까지: <span id='penaltyTimer' style='font-size:1.3em;'>${penaltyTime}</span>초`;
+    document.getElementById('finalResult').innerHTML = ""; 
+
+    clearInterval(penaltyInterval); // 혹시 돌고 있을 기존 패널티 완전 삭제
+    penaltyInterval = setInterval(function() {
+      penaltyTime--;
+      const timerEl = document.getElementById('penaltyTimer');
+      if (timerEl) timerEl.innerText = penaltyTime;
+      
+      if (penaltyTime <= 0) {
+        clearInterval(penaltyInterval);
+        alert("시스템 방화벽이 재부팅되었습니다. 금고 해독을 재시도합니다.");
+        
+        document.getElementById('decryptedInput').value = "";
+        document.getElementById('decryptedInput').disabled = false;
+        document.getElementById('btnVerifyDecrypt').disabled = false;
+        document.getElementById('decryptionBox').style.display = "block";
+        
+        // 중요: 이 함수 내부에서 HTML이 정상 복구되어 0초 정지 현상이 해결됩니다.
+        triggerHackerAttack();
+      }
+    }, 1000);
+  }
+</script>
+</body>
+</html>
