@@ -1,0 +1,121 @@
+
+    /* 사이버 펑크 / 비밀 작전소 테마 스타일 정의 */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background-color: #0b0f19; 
+      color: #e2e8f0; 
+      padding: 20px;
+    }
+    .container { 
+      max-width: 650px; 
+      margin: auto; 
+      background: #111827; 
+      padding: 30px; 
+      border-radius: 15px; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      border: 2px solid #1f2937;
+    }
+    h1 { color: #10b981; text-align: center; font-size: 2.2em; text-shadow: 0 0 10px rgba(16,185,129,0.3); margin-top: 5px; }
+    h2, h3 { color: #38bdf8; border-bottom: 1px solid #1f2937; padding-bottom: 8px; }
+    
+    .step { display: none; margin-top: 20px; padding: 20px; border: 1px solid #374151; border-radius: 8px; background: #1f2937; }
+    .active { display: block; }
+
+    .typing-text {
+    white-space: pre-line;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #00ff88;
+    min-height: 24px;
+    }
+
+    .typing-text::after {
+      white-space: pre-line;
+      content: "|";
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+    50% {
+    opacity: 0;
+      }
+    }
+
+    
+    input, select { 
+      padding: 12px; width: calc(100% - 26px); margin-bottom: 15px; 
+      border: 1px solid #4b5563; border-radius: 6px; 
+      background: #0f172a; color: #f8fafc;
+      font-family: monospace; font-size: 1.1em; 
+    }
+    input:focus, select:focus { border-color: #38bdf8; outline: none; }
+    
+    button { 
+      padding: 12px 20px; background: #0284c7; color: white; border: none; border-radius: 6px; 
+      cursor: pointer; margin-right: 5px; font-weight: bold; font-size: 1em; transition: 0.2s;
+    }
+    button:hover { background: #0369a1; box-shadow: 0 0 10px rgba(3,105,161,0.5); }
+    
+    .success-msg { color: #4ade80; font-weight: bold; margin-top: 10px; display: inline-block; font-size: 1.1em; }
+    .error-msg { color: #f87171; font-weight: bold; margin-top: 10px; display: inline-block; font-size: 1.1em; }
+    
+    /* 네온 전광판 데이터 박스 */
+    .data-box { 
+      background: #020617; padding: 15px; border-radius: 8px; 
+      font-family: monospace; font-size: 1.4em; text-align: center; letter-spacing: 3px; 
+      color: #38bdf8; font-weight: bold; display: block; margin: 15px 0;
+      border: 1px solid #0369a1; box-shadow: inset 0 0 10px rgba(3,105,161,0.3);
+    }
+    
+    /* 안내 보드 */
+    .rule-box { background: #111827; border-left: 5px solid #0ea5e9; padding: 15px; margin-bottom: 15px; border-radius: 0 8px 8px 0; }
+    .rule-box ul { margin: 8px 0 0 0; padding-left: 20px; color: #9ca3af; line-height: 1.6; }
+    .rule-box li strong { color: #f43f5e; }
+    
+    .bit-info { background: #1e1b4b; color: #c084fc; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 15px; border: 1px solid #581c87; }
+    
+    /* 🚨 해커 실시간 침입 애니메이션 */
+    @keyframes alert-blink {
+      0% { background-color: #270514; border-color: #f43f5e; color: #fda4af; }
+      50% { background-color: #4c051e; border-color: #e11d48; color: #ffe4e6; box-shadow: 0 0 15px rgba(225,29,72,0.4); }
+      100% { background-color: #270514; border-color: #f43f5e; color: #fda4af; }
+    }
+    .hacker-alert { padding: 18px; border: 2px solid #f43f5e; border-radius: 8px; font-weight: bold; text-align: center; margin: 15px 0; animation: alert-blink 1.5s infinite; font-size: 1.1em; }
+    .timer-text { font-size: 1.5em; color: #f43f5e; font-family: monospace; font-weight: 900; text-shadow: 0 0 5px rgba(244,63,94,0.6); }
+    
+    .link-btn { display: inline-block; margin-top: 10px; padding: 10px 15px; background: #10b981; color: #064e3b; text-decoration: none; border-radius: 6px; font-weight: bold; transition: 0.2s; }
+    .link-btn:hover { background: #34d399; box-shadow: 0 0 10px rgba(52,211,153,0.5); }
+    #introText{
+        transition: all 0.5s ease;
+    }
+
+/* 부모 컨테이너 (기존 introText 스타일이 있다면 정렬만 확인해보세요) */
+#introText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    min-height: 300px; /* 세로 흔들림 방지용 */
+}
+
+/* 왕 큰 이모지 스타일 */
+.main-emoji {
+    font-size: 5rem; /* 원하는 만큼 키우세요! 4rem ~ 6rem 추천 */
+    margin-bottom: 1.5rem; /* 이모지와 아래 텍스트 사이 간격 */
+    animation: bounce 0.5s ease infinite alternate; /* (선택) 둥실둥실 효과 */
+}
+
+/* 텍스트 스타일 */
+.main-text {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    font-weight: bold;
+}
+
+/* (옵션) 이모지가 위아래로 살짝 움직이는 귀여운 효과 */
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
