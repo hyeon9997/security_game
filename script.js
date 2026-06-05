@@ -526,6 +526,80 @@ function verifyDecryption() {
       if (partnerTeam == "BRAVO_C"){
         document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: V의 개수 x 2</span>";
       }
+        if (partnerTeam == "CHARLIE_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br> 비밀번호 4자리 중 첫 번째 자리: B의 개수</span>";
+      }
+      if (partnerTeam == "CHARLIE_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: F의 개수 x 2</span>";
+      }
+      if (partnerTeam == "CHARLIE_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: J의 개수, 네 번째 자리: K의 개수</span>";
+      }
+      if (partnerTeam == "DELTA_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 첫 번째 자리: M의 개수</span>";
+      }
+      if (partnerTeam == "DELTA_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: Ｑ의 개수, 네 번째 자리: P의 개수</span>";
+      }
+      if (partnerTeam == "DELTA_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: V의 개수 x 2</span>";
+      }
+
+        if (partnerTeam == "ECHO_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br> 비밀번호 4자리 중 첫 번째 자리: B의 개수</span>";
+      }
+      if (partnerTeam == "ECHO_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: F의 개수 x 2</span>";
+      }
+      if (partnerTeam == "ECHO_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: J의 개수, 네 번째 자리: K의 개수</span>";
+      }
+      if (partnerTeam == "FOXTROT_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 첫 번째 자리: M의 개수</span>";
+      }
+      if (partnerTeam == "FOXTROT_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: Ｑ의 개수, 네 번째 자리: P의 개수</span>";
+      }
+      if (partnerTeam == "FOXTROT_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: V의 개수 x 2</span>";
+      }
+
+        if (partnerTeam == "GOLF_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br> 비밀번호 4자리 중 첫 번째 자리: B의 개수</span>";
+      }
+      if (partnerTeam == "GOLF_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: F의 개수 x 2</span>";
+      }
+      if (partnerTeam == "GOLF_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: J의 개수, 네 번째 자리: K의 개수</span>";
+      }
+      if (partnerTeam == "HOTEL_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 첫 번째 자리: M의 개수</span>";
+      }
+      if (partnerTeam == "HOTEL_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: Ｑ의 개수, 네 번째 자리: P의 개수</span>";
+      }
+      if (partnerTeam == "HOTEL_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: V의 개수 x 2</span>";
+      }
+        if (partnerTeam == "INDIA_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br> 비밀번호 4자리 중 첫 번째 자리: B의 개수</span>";
+      }
+      if (partnerTeam == "INDIA_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: F의 개수 x 2</span>";
+      }
+      if (partnerTeam == "INDIA_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: J의 개수, 네 번째 자리: K의 개수</span>";
+      }
+      if (partnerTeam == "JULIET_A"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 첫 번째 자리: M의 개수</span>";
+      }
+      if (partnerTeam == "JULIET_B"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 두 번째 자리: Ｑ의 개수, 네 번째 자리: P의 개수</span>";
+      }
+      if (partnerTeam == "JULIET_C"){
+        document.getElementById('finalResult').innerHTML = "<span class='success-msg' style='font-size:1.4em;'>🔓 MISSION CLEAR! <br>비밀번호 4자리 중 세 번째 자리: V의 개수 x 2</span>";
+      }
       
     } else {
       clearInterval(hackerInterval);
